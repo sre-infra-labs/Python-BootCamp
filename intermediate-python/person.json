@@ -5,6 +5,17 @@
     "hasChildren": true,
     "titles": [
         "engineer",
-        "programmer"
+        "programmer",
+        "father"
+    ],
+    "children": [
+        {
+            "firstName": "Saanvi",
+            "age": 7
+        },
+        {
+            "firstName": "Anant",
+            "age": 3
+        }
     ]
 }
