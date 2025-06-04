@@ -13,7 +13,13 @@ if __name__ == "__main__":
   first = q.get()
   print(first)
 
+  # Check if queue is empty?
+  # q.empty()
+
+  # When done processing queue task, mark it done
   q.task_done()
+
+  # Block further execution until all kinds in queue ar done processing
   q.join()
 
   print('end main')

@@ -8,7 +8,7 @@ def add_100(number,lock):
       number.value += 1
 
 if __name__ == "__main__":
-  shared_number = Value('i',0)
+  shared_number = Value('i',0) # Value(data_type, value)
   lock = Lock()
 
   print(f'\nValue at start: {shared_number.value}')
