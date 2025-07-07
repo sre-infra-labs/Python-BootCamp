@@ -1,0 +1,73 @@
+import subprocess
+import re
+import argparse
+import sys
+import requests
+import os
+
+# 🔐 Hardcoded Slack user IDs to mention in alert
+SLACK_USER_IDS = ["UED14KCLE", "U088B1A3ZN2"]  # Replace with actual user IDs
+
+def get_battery_info():
+    try:
+        battery_path_cmd = "upower -e | grep 'BAT'"
+        battery_path = subprocess.check_output(battery_path_cmd, shell=True).decode().strip()
+
+        battery_info_cmd = f"upower -i {battery_path}"
+        output = subprocess.check_output(battery_info_cmd, shell=True).decode()
+
+        return output
+    except subprocess.CalledProcessError as e:
+        print("Error getting battery info:", e)
+        sys.exit(1)
+
+def parse_battery_info(info):
+    battery_state = {}
+    for line in info.splitlines():
+        line = line.strip()
+        if line.startswith("state:"):
+            battery_state["state"] = line.split(":", 1)[1].strip().lower()
+        elif line.startswith("percentage:"):
+            battery_state["percentage"] = int(re.findall(r'\d+', line)[0])
+    return battery_state
+
+def send_slack_alert(webhook_url, percentage, state):
+    # Mention all users by ID
+    user_mentions = " ".join(f"<@{uid}>" for uid in SLACK_USER_IDS)
+    
+    message = (
+        f":warning: {user_mentions} Battery is at {percentage}% and is *{state}*."
+        f" Please plug in the charger! :electric_plug:"
+    )
+    payload = {"text": message}
+    
+    response = requests.post(webhook_url, json=payload)
+    if response.status_code != 200:
+        raise Exception(f"Slack webhook failed: {response.status_code}, {response.text}")
+
+def main(threshold):
+    webhook_url = os.getenv("SLACK_PERSONAL_ALERTS_WEBHOOK_URL")
+    if not webhook_url:
+        print("Environment variable SLACK_PERSONAL_ALERTS_WEBHOOK_URL is not set.")
+        sys.exit(1)
+
+    info = get_battery_info()
+    battery = parse_battery_info(info)
+
+    percentage = battery.get("percentage")
+    state = battery.get("state")
+
+    if percentage is None or state is None:
+        print("Could not parse battery percentage or state.")
+        sys.exit(1)
+
+    if state != "charging" and percentage < threshold:
+        send_slack_alert(webhook_url, percentage, state)
+    else:
+        print(f"Battery is at {percentage}% and state is '{state}'. No alert needed.")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--threshold", type=int, default=28, help="Battery threshold percentage")
+    args = parser.parse_args()
+    main(args.threshold)
