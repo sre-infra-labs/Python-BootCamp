@@ -31,13 +31,11 @@ def parse_battery_info(info):
             battery_state["percentage"] = int(re.findall(r'\d+', line)[0])
     return battery_state
 
-def send_slack_alert(webhook_url, percentage, state):
-    # Mention all users by ID
+def send_slack_alert(webhook_url, percentage, state, reason):
     user_mentions = " ".join(f"<@{uid}>" for uid in SLACK_USER_IDS)
     
     message = (
-        f":warning: {user_mentions} Battery is at {percentage}% and is *{state}*."
-        f" Please plug in the charger! :electric_plug:"
+        f":warning: {user_mentions} Battery is at {percentage}% and is *{state}*. {reason} :electric_plug:"
     )
     payload = {"text": message}
     
@@ -45,7 +43,7 @@ def send_slack_alert(webhook_url, percentage, state):
     if response.status_code != 200:
         raise Exception(f"Slack webhook failed: {response.status_code}, {response.text}")
 
-def main(threshold):
+def main(lower_threshold, upper_threshold):
     webhook_url = os.getenv("SLACK_PERSONAL_ALERTS_WEBHOOK_URL")
     if not webhook_url:
         print("Environment variable SLACK_PERSONAL_ALERTS_WEBHOOK_URL is not set.")
@@ -61,13 +59,20 @@ def main(threshold):
         print("Could not parse battery percentage or state.")
         sys.exit(1)
 
-    if state != "charging" and percentage < threshold:
-        send_slack_alert(webhook_url, percentage, state)
+    if state != "charging" and percentage < lower_threshold:
+        reason = f"Battery is low (below {lower_threshold}%) and not charging. Please plug in."
+        send_slack_alert(webhook_url, percentage, state, reason)
+
+    elif state == "charging" and percentage > upper_threshold:
+        reason = f"Battery is high (above {upper_threshold}%) and still charging. Consider unplugging."
+        send_slack_alert(webhook_url, percentage, state, reason)
+
     else:
         print(f"Battery is at {percentage}% and state is '{state}'. No alert needed.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--threshold", type=int, default=28, help="Battery threshold percentage")
+    parser.add_argument("--lower-threshold", type=int, default=35, help="Lower battery threshold percentage")
+    parser.add_argument("--upper-threshold", type=int, default=80, help="Upper battery threshold percentage")
     args = parser.parse_args()
-    main(args.threshold)
+    main(args.lower_threshold, args.upper_threshold)
