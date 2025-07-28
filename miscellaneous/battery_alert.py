@@ -33,17 +33,17 @@ def parse_battery_info(info):
 
 def send_slack_alert(webhook_url, percentage, state, reason):
     user_mentions = " ".join(f"<@{uid}>" for uid in SLACK_USER_IDS)
-    
+
     message = (
         f":warning: {user_mentions} Battery is at {percentage}% and is *{state}*. {reason} :electric_plug:"
     )
     payload = {"text": message}
-    
+
     response = requests.post(webhook_url, json=payload)
     if response.status_code != 200:
         raise Exception(f"Slack webhook failed: {response.status_code}, {response.text}")
 
-def main(lower_threshold, upper_threshold):
+def main(lower_threshold, upper_threshold, force_slack_alert):
     webhook_url = os.getenv("SLACK_PERSONAL_ALERTS_WEBHOOK_URL")
     if not webhook_url:
         print("Environment variable SLACK_PERSONAL_ALERTS_WEBHOOK_URL is not set.")
@@ -58,6 +58,11 @@ def main(lower_threshold, upper_threshold):
     if percentage is None or state is None:
         print("Could not parse battery percentage or state.")
         sys.exit(1)
+
+    if force_slack_alert:
+        reason = f"Forced alert: Battery is at {percentage}% and state is '{state}'."
+        send_slack_alert(webhook_url, percentage, state, reason)
+        return
 
     if state != "charging" and percentage < lower_threshold:
         reason = f"Battery is low (below {lower_threshold}%) and not charging. Please plug in."
@@ -74,5 +79,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--lower-threshold", type=int, default=35, help="Lower battery threshold percentage")
     parser.add_argument("--upper-threshold", type=int, default=80, help="Upper battery threshold percentage")
+    parser.add_argument("--force-slack-alert", type=bool, default=False, help="Force Slack alert irrespective of battery state")
+
     args = parser.parse_args()
-    main(args.lower_threshold, args.upper_threshold)
+    main(args.lower_threshold, args.upper_threshold, args.force_slack_alert)
