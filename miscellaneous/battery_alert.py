@@ -43,8 +43,12 @@ def send_slack_alert(webhook_url, percentage, state, reason):
     if response.status_code != 200:
         raise Exception(f"Slack webhook failed: {response.status_code}, {response.text}")
 
-def main(lower_threshold, upper_threshold, force_slack_alert):
-    webhook_url = os.getenv("SLACK_PERSONAL_ALERTS_WEBHOOK_URL")
+def main(lower_threshold, upper_threshold, force_slack_alert, slack_webhook_url):
+    if slack_webhook_url == "":
+        webhook_url = os.getenv("SLACK_PERSONAL_ALERTS_WEBHOOK_URL")
+    else:
+        webhook_url = slack_webhook_url
+
     if not webhook_url:
         print("Environment variable SLACK_PERSONAL_ALERTS_WEBHOOK_URL is not set.")
         sys.exit(1)
@@ -79,7 +83,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--lower-threshold", type=int, default=35, help="Lower battery threshold percentage")
     parser.add_argument("--upper-threshold", type=int, default=80, help="Upper battery threshold percentage")
+    parser.add_argument("--slack-webhook-url", type=str, default="", help="Slack webhook URL for alerts")
     parser.add_argument("--force-slack-alert", type=bool, default=False, help="Force Slack alert irrespective of battery state")
 
     args = parser.parse_args()
-    main(args.lower_threshold, args.upper_threshold, args.force_slack_alert)
+    main(args.lower_threshold, args.upper_threshold, args.force_slack_alert, args.slack_webhook_url)
