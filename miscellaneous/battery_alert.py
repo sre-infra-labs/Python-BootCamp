@@ -4,9 +4,31 @@ import argparse
 import sys
 import requests
 import os
+from PyQt5.QtWidgets import QApplication, QMessageBox
 
 # 🔐 Hardcoded Slack user IDs to mention in alert
 SLACK_USER_IDS = ["UED14KCLE", "U088B1A3ZN2"]  # Replace with actual user IDs
+
+def show_popup(title, text):
+    """
+    Displays a popup message using PyQt5.
+
+    Args:
+        title (str): The title of the popup window.
+        text (str): The message content to be displayed.
+    """
+    # Create an application instance
+    app = QApplication(sys.argv)
+
+    # Create the message box
+    msg_box = QMessageBox()
+    msg_box.setIcon(QMessageBox.Warning) # Set icon to a warning symbol
+    msg_box.setWindowTitle(title)
+    msg_box.setText(text)
+    msg_box.setStandardButtons(QMessageBox.Ok) # Add an OK button
+
+    # Display the message box and run the application's event loop
+    msg_box.exec_()
 
 def get_battery_info():
     try:
@@ -71,10 +93,12 @@ def main(lower_threshold, upper_threshold, force_slack_alert, slack_webhook_url)
     if state != "charging" and percentage < lower_threshold:
         reason = f"Battery is low (below {lower_threshold}%) and not charging. Please plug in."
         send_slack_alert(webhook_url, percentage, state, reason)
+        show_popup("Low Battery", "Your laptop battery is low. Please plug in the charger soon.")
 
     elif state == "charging" and percentage > upper_threshold:
         reason = f"Battery is high (above {upper_threshold}%) and still charging. Consider unplugging."
         send_slack_alert(webhook_url, percentage, state, reason)
+        show_popup("High Battery", "Your laptop battery is high. Please unplug the charger.")
 
     else:
         print(f"Battery is at {percentage}% and state is '{state}'. No alert needed.")
