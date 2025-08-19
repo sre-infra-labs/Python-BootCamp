@@ -108,7 +108,7 @@ if __name__ == "__main__":
     parser.add_argument("--lower-threshold", type=int, default=35, help="Lower battery threshold percentage")
     parser.add_argument("--upper-threshold", type=int, default=80, help="Upper battery threshold percentage")
     parser.add_argument("--slack-webhook-url", type=str, default="", help="Slack webhook URL for alerts")
-    parser.add_argument("--force-slack-alert", type=bool, default=False, help="Force Slack alert irrespective of battery state")
+    parser.add_argument("--force-slack-alert", action="store_true", help="Force Slack alert irrespective of battery state")
 
     args = parser.parse_args()
     main(args.lower_threshold, args.upper_threshold, args.force_slack_alert, args.slack_webhook_url)
