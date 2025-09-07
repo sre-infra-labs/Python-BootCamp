@@ -1,0 +1,555 @@
+{
+  "description": "",
+  "a": "",
+  "b": "",
+  "c": "",
+  "d": "",
+  "answer": "",
+  "qid": "9-0",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is the suggested practice to name constants",
+  "a": "lower_case_with_underscores",
+  "b": "CapWords",
+  "c": "ALL_CAPS_WITH_UNDERSCORES",
+  "d": "_single_leading_underscore",
+  "answer": "c",
+  "qid": "9-0",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is the suggested practice to name classes",
+  "a": "lower_case_with_underscores",
+  "b": "CapWords",
+  "c": "ALL_CAPS_WITH_UNDERSCORES",
+  "d": "_single_leading_underscore",
+  "answer": "b",
+  "qid": "9-1",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is the suggested practice to name variables and functions",
+  "a": "lower_case_with_underscores",
+  "b": "CapWords",
+  "c": "ALL_CAPS_WITH_UNDERSCORES",
+  "d": "_single_leading_underscore",
+  "answer": "a",
+  "qid": "9-2",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is the suggested practice to name protected attributes of a class",
+  "a": "lower_case_with_underscores",
+  "b": "CapWords",
+  "c": "ALL_CAPS_WITH_UNDERSCORES",
+  "d": "_single_leading_underscore",
+  "answer": "d",
+  "qid": "9-3",
+  "topic": "9"
+}
+
+{
+  "description": "What is the suggested order of imports",
+  "a": "System imports, Third-party imports, local source import trees",
+  "b": "System imports, Local source import trees, Third-party imports",
+  "c": "Local source import trees, System imports, Third-party imports ",
+  "d": "Third-party imports, Local source import trees, System imports ",
+  "answer": "a",
+  "qid": "9-4",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is commonly preferred in testing?",
+  "a": "Factories",
+  "b": "Fixtures",
+  "answer": "a",
+  "qid": "9-5",
+  "topic": "9"
+}
+
+
+{
+  "description": "Which of the following is valid Comprehension if <code>numbers</code> is a list?",
+  "a": "n*2 for n in numbers",
+  "b": "n*2 for n in range(10)",
+  "c": "n*2 for n in range(10) if n%2==0",
+  "d": "All the above",
+  "answer": "d",
+  "qid": "9-6",
+  "topic": "9"
+}
+
+{
+  "description": "What is the outcome of the following?<br/><code>for i, v in enumerate(range(0, 10, 2)): print(i, end=\" \")<code/>",
+  "a": "0 1 2 3 4",
+  "b": "0 2 4 8",
+  "c": "1 2 3 4 5",
+  "d": "Results in syntax error",
+  "answer": "a",
+  "qid": "9-7",
+  "topic": "9"
+}
+
+{
+  "description": "What is the outcome of the following?<br/><code>for i, v in enumerate(range(10, 15, 2)): print(v, end=\" \")<code/>",
+  "a": "0 1 2",
+  "b": "10 12 14",
+  "c": "12 14",
+  "d": "Results in syntax error",
+  "answer": "b",
+  "qid": "9-8",
+  "topic": "9"
+}
+
+{
+  "description": "What is the outcome of the following?<br/><code>for x, y in {'a': 1, 'b':2, 'c':3}.items(): print(y, end=" ")<code/>",
+  "a": "a b c",
+  "b": "1 2 3",
+  "c": "(a,1) (b,2) (c,3)",
+  "d": "Results in syntax error",
+  "answer": "b",
+  "qid": "9-9",
+  "topic": "9"
+}
+
+{
+  "description": "What is the outcome of the following?<br/><code>for x, y in {'a': 1, 'b':2, 'c':3}: print(y, end=" ")<code/>",
+  "a": "a b c",
+  "b": "1 2 3",
+  "c": "(a,1) (b,2) (c,3)",
+  "d": "Results in syntax error",
+  "answer": "d",
+  "qid": "9-10",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is true regarding data classes",
+  "a": "The __eq__ compares data classes",
+  "b": "__repr__ prints data class",
+  "c": "Less boilerplate compared to a regular class",
+  "d": "All the above",
+  "answer": "d",
+  "qid": "9-11",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is considered a bad practice?",
+  "a": "To return a value from __init__()",
+  "b": "To return large tuple from a closure",
+  "c": "To pass a mutable object as a default argument",
+  "d": "All the above",
+  "answer": "d",
+  "qid": "9-12",
+  "topic": "9"
+}
+
+{
+  "description": "How to mark a class as a data class?",
+  "a": "By using @dataclasses.dataclass decorator on the class",
+  "b": "By deriving from dataclasses.dataclass ",
+  "c": "By setting __metaclass__ to 'dataclass'",
+  "d": "By setting __data_class to True",
+  "answer": "a",
+  "qid": "9-13",
+  "topic": "9"
+}
+
+{
+  "description": "Python do not have the concept of <code>abstract classes</code>? Which of the following module provides artifacts to mark a class as an abstrct class?",
+  "a": "functools",
+  "b": "abc",
+  "c": "abstracts",
+  "d": "There is no such module. Can not mark a class as abstract class in Python",
+  "answer": "b",
+  "qid": "9-14",
+  "topic": "9"
+}
+
+{
+  "description": "How to develop an abstrct class in Python?",
+  "a": "By deriving it from abc.ABC",
+  "b": "By having at least one of its methods with @abc.abstractmethod decorator",
+  "c": "By deriving it from abc.ABC and having at least one it's methods with @abc.abstractmethod decorator",
+  "d": "By marking the class with @abc.abstractclass decorator",
+  "answer": "c",
+  "qid": "9-15",
+  "topic": "9"
+}
+
+{
+  "description": "How the <code>slots</code> are useful in Python classes?",
+  "a": "To store private attributes",
+  "b": "To access base class properties from derived classes",
+  "c": "To provide faster access to the attributes",
+  "d": "To property free-up the memory upon destroying the object",
+  "answer": "c",
+  "qid": "9-16",
+  "topic": "9"
+}
+
+{
+  "description": "What is true regarding <code>slots</code> in Python?",
+  "a": "The attributes declared as slotted are stored in a dictionary",
+  "b": "Once a class have slotted attributes, no other attributes can be added to it's objects",
+  "c": "The slotted attributes are read-only",
+  "d": "Only data classes can have slotted attributes",
+  "answer": "b",
+  "qid": "9-17",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is true about <code>lambda</code>?",
+  "a": "Only boolean values can be returned from lambda ",
+  "b": "Maximum size of a lambda is 80 lines ",
+  "c": "Decorators are not allowed in lambda ",
+  "d": "All the above",
+  "answer": "c",
+  "qid": "9-18",
+  "topic": "9"
+}
+
+{
+  "description": "When would you prefer <code>lambda</code> functions over regular functions?",
+  "a": "To develop functions that are meant for one-time use ",
+  "b": "To develop functions that are to be passed to other functions",
+  "c": "To implement template pattern in functional programming",
+  "d": "All the above",
+  "answer": "d",
+  "qid": "9-19",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is a valid <code>lambda</code> function?",
+  "a": "n => n + 1",
+  "b": "n : n + 1",
+  "c": "lambda n: n + 1",
+  "d": "All the above",
+  "answer": "c",
+  "qid": "9-20",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is efficient when iterating over with large data sets",
+  "a": "Generators",
+  "b": "Iterators",
+  "answer": "a",
+  "qid": "9-21",
+  "topic": "9"
+}
+
+
+{
+  "description": "Which of the following offers cooperative multitasking in python",
+  "a": "Threads",
+  "b": "Corouties",
+  "c": "Processes",
+  "d": "Verticals",
+  "answer": "b",
+  "qid": "9-22",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following are best candidates to implement strategy pattern in Python functional programming?",
+  "a": "nested functions",
+  "b": "higher order functions",
+  "c": "decorators",
+  "d": "functors",
+  "answer": "d",
+  "qid": "9-23",
+  "topic": "9"
+}
+
+{
+  "description": "What is the primary purpose of <code>__init__()</code>?",
+  "a": "To instantiate the class",
+  "b": "To initializes the instance members",
+  "c": "To convert a function into class",
+  "d": "To convert a class into callable function",
+  "answer": "b",
+  "qid": "9-24",
+  "topic": "9"
+}
+
+{
+  "description": "What is the primary purpose of <code>__call__()</code>?",
+  "a": "To call base class members",
+  "b": "To call meta class definition",
+  "c": "To convert a function into class",
+  "d": "To convert a class into callable function",
+  "answer": "d",
+  "qid": "9-25",
+  "topic": "9"
+}
+
+
+
+{
+  "description": "How to import a module named 'directory' from $PYTHONPATH/glarimy/services?",
+  "a": "import directory ",
+  "b": "import glarimy/services/directory",
+  "c": "import glarimy/services ",
+  "d": "import glarimy.services.directory",
+  "answer": "d",
+  "qid": "9-26",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following returns the list of keys in a dictionary named \"map\"?",
+  "a": "map.keys()",
+  "b": "[k for k,v in map.items()]",
+  "c": "Both the above",
+  "d": "There is no way to get the keys of dictionary",
+  "answer": "c",
+  "qid": "9-27",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is true regarding abstract classes?",
+  "a": "They inherit abc.ABC",
+  "b": "They are not to be instantiated",
+  "c": "They can have at least one abstract method and any number of concrete methods",
+  "d": "All the above ",
+  "answer": "d",
+  "qid": "9-28",
+  "topic": "9"
+}
+
+{
+  "description": " Which of the following fetches the next item from a <code>generator</code>?",
+  "a": "generator.next()",
+  "b": "next(generator)",
+  "c": "generator.next",
+  "d": "All the above",
+  "answer": "b",
+  "qid": "9-29",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is true about <code>lambda</code>?",
+  "a": "They are anonymous",
+  "b": "Only expressions are allowed",
+  "c": "They can accept parameters",
+  "d": "All the above are true",
+  "answer": "d",
+  "qid": "9-30",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is best suited to access values from an infinite series? ",
+  "a": "Iterator",
+  "b": "Generator",
+  "answer": "b",
+  "qid": "9-31",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following returns a function that can still hold on to the <code>nonlocal</code> variables?",
+  "a": "Threads",
+  "b": Corouties"",
+  "c": "Generators",
+  "d": "Closures",
+  "answer": "d",
+  "qid": "9-32",
+  "topic": "9"
+}
+
+{
+  "description": "What is the best practice when a function fails to return exptected value?",
+  "a": "It should return None",
+  "b": "It should return an error code ",
+  "c": "It should raise an error",
+  "d": "It should return an enumerated value",
+  "answer": "c",
+  "qid": "9-33",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following marks a setter for a property named <code>\"uname\"</code>?",
+  "a": "@property",
+  "b": "@setter ",
+  "c": "@uname.setter",
+  "d": "None of the above ",
+  "answer": "c",
+  "qid": "9-34",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is the Python scoping rule?",
+  "a": "Built-in, Global, Local and Enclosing",
+  "b": "Local, Enclosing, Global and Built-in",
+  "c": "Global, Enclosing and Local",
+  "d": "Local, Enclosing and Global",
+  "answer": "b",
+  "qid": "9-35",
+  "topic": "9"
+}
+
+{
+  "description": "Default value of a function argument is evaluated only once at the time of function definition?",
+  "a": "Yes",
+  "b": "No, it is evaluated every time the function is called",
+  "c": "No, it is evaluated every time the function is called without a value for the argument",
+  "answer": "a",
+  "qid": "9-36",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is a bad practice",
+  "a": "Initializing the parameters with mutable objects as default values",
+  "b": "Returning functions from a higher order function",
+  "c": "Marking object specific members as instance variables",
+  "d": "All the above",
+  "answer": "a",
+  "qid": "9-37",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following are associated with <code>Event Loop</code>?",
+  "a": "Threads",
+  "b": "Coroutines",
+  "answer": "b",
+  "qid": "9-38",
+  "topic": "9"
+}
+
+{
+  "description": "What is the most popular application of <code>closures<code> in Python?",
+  "a": "templates",
+  "b": "decorators",
+  "c": "strategy",
+  "d": "command",
+  "answer": "b",
+  "qid": "9-39",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following is one of the most popular application of <code>meta class</code> concept in Python?",
+  "a": "to choose a strategy",
+  "b": "to register classes",
+  "c": "to fill a template",
+  "d": "to destroy objects",
+  "answer": "b",
+  "qid": "9-40",
+  "topic": "9"
+}
+
+{
+  "description": "Using which of the following, threads can <code>wait</code> and <code>notify</code>?",
+  "a": "Lock",
+  "b": "RLock",
+  "c": "Condition",
+  "d": "Semopher",
+  "answer": "c",
+  "qid": "9-41",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following can be used to create an asynchornous task?",
+  "a": "Coroutine",
+  "b": "Future",
+  "c": "Thread",
+  "d": "All the above",
+  "answer": "d",
+  "qid": "9-42",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following groups several asynchronous tasks together?",
+  "a": "asynchio.all()",
+  "b": "asynchio.create_task()",
+  "c": "asynchio.group()",
+  "d": "asynchio.gather()",
+  "answer": "d",
+  "qid": "9-43",
+  "topic": "9"
+}
+
+{
+  "description": "How is the <i>descriptor protocol</i> useful, in Python?",
+  "a": "To design property getter",
+  "b": "To design property setter",
+  "c": "To provide controlled access to properties",
+  "d": "All the above",
+  "answer": "d",
+  "qid": "9-44",
+  "topic": "9"
+}
+
+{
+  "description": "Which operator is suggested to open a file, to avoid resource leaking?",
+  "a": "expect",
+  "b": "with",
+  "c": "await",
+  "d": "try",
+  "answer": "b",
+  "qid": "9-45",
+  "topic": "9"
+}
+
+{
+  "description": "If <code>Shape</code> is the base class of <code>Square</code>, how the <code>Square</code> can access the base class members?",
+  "a": "Using super(), while overriding",
+  "b": "Using the reference of base class, while not overriding",
+  "c": "Using self reference, while not overriding",
+  "d": "Any of the above",
+  "answer": "d",
+  "qid": "9-46",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following operator is added in Python 3.8.5?",
+  "a": "===",
+  "b": "<>",
+  "c": ":=",
+  "d": "All the above",
+  "answer": "c",
+  "qid": "9-47",
+  "topic": "9"
+}
+
+{
+  "description": "Which of the following parameter syntax is introduced in Python 3.8.5?",
+  "a": "Default arguments",
+  "b": "Positional arguments",
+  "c": "Keyworld arguments",
+  "d": "Position-only arguments",
+  "answer": "d",
+  "qid": "9-48",
+  "topic": "9"
+}
+
+{
+  "description": "Is is possible to iterate a dictionary in reverse order?",
+  "a": "Yes, since version 3.8.5",
+  "b": "No, since version 3.8.5",
+  "c": "This feature is never supported",
+  "d": "This feature has always been supported",
+  "answer": "a",
+  "qid": "9-49",
+  "topic": "9"
+}
