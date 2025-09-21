@@ -1,0 +1,23 @@
+1. console read and write 
+2. arithmetic operations
+3. functions
+4. modules
+5. packages
+6. generators
+7. lambda
+8. closure
+9. decorator
+10.oops
+11.abstractions
+12.slots
+13.functors
+14.descriptors
+15.meta
+16.dataclasses
+17.coroutines
+18.tasks
+19.timer
+20.threads
+21.locks
+22.conditions
+23.tests

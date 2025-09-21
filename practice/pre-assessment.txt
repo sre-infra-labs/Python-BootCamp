@@ -1,0 +1,114 @@
+Python Best Practices
+Pre-Assessment
+
+1. Which of the following is suggested practice to name constants?
+A) Lower case with underscores
+B) CapWords
+C) All caps with underscores
+D) single leading underscore 
+
+Answer: C
+
+2. What is the suggested order of imports?
+A) System imports, Third-party imports, local source import trees
+B) System imports, Local source import trees, Third-party imports
+C) Local source import trees, System imports, Third-party imports 
+D) Third-party imports, Local source import trees, System imports 
+
+Answer: A 
+
+3. Which of the following is preferred in testing?
+A) Factories
+B) Fixtures 
+
+Answer: A 
+
+4. Which of the following is valid "List Comprehension"?
+A) n*2 for n in numbers 
+B) n*2 for n in range(10)
+C) double_number(n) n in range(10)
+D) All the above
+
+Answer: D 
+
+5. Which of the following is true regarding data classes?
+A) They are useful when a function needs to return more than three values
+B) The __eq__ compares data classes
+C) __repr__ prints data class
+D) All the above 
+
+Answer: D 
+
+6. Which of the following merges two dictionaries named d1 and d2?
+A) merge(d1, d2)
+B) {d1, d2}
+C) {..d1, ..d2}
+D) {**d1, **d2}
+
+Answer: D 
+
+7. Which of the following is true about lambda?
+A) Only boolean values can be returned from lambda 
+B) Maximum size of a lambda is 80 lines 
+C) Annotations are not allowed in lambda 
+D) All the above are true 
+
+Answer: C
+
+8. Which of the following is efficient when dealing with large data sets. 
+A) Iterator 
+B) Generator 
+
+Answer: A 
+
+9. Which of the following offers cooperative multitasking in python?
+A) Threads
+B) Corouties 
+C) Generators
+D) Closures 
+
+Answer: B
+
+10. Functors are a way to implement strategy pattern. Yes or No?
+A) Yes
+B) No 
+
+Answer: A 
+
+11. What is the primary purpose of __init__?
+A) To create and return an object
+B) To initialize instance members 
+C) To allocate memory 
+D) All the above 
+
+Answer: B 
+
+12. How a member of an object may be assigned with a value in controlled manner?
+A) Using setter methods 
+B) Using __init__ 
+C) Using @property decorator
+D) None of the above 
+
+Answer: C 
+
+13. Which of the following is a bad practice in Python?
+A) Assigning a lambda expression to a variable 
+B) Returning a value from __init__ 
+C) Implementing setters and getters 
+D) All the above 
+
+Answer: D 
+
+14. Which of the following must be avoided?
+A) Passing a mutable list to a function as default argument
+B) Passing a mutable dictionary to a function as default argument 
+C) Both A & B are bad practices 
+
+Answer: C 
+
+15. What is the best practice of indentation in Python?
+A) Using four spaces
+B) Using tabs 
+C) Using delimiters 
+
+Answer: A 

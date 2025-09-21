@@ -1,0 +1,21 @@
+{
+    "name": "Ajay",
+    "age": 33,
+    "city": "Hyderabad",
+    "hasChildren": true,
+    "titles": [
+        "engineer",
+        "programmer",
+        "father"
+    ],
+    "children": [
+        {
+            "firstName": "Saanvi",
+            "age": 7
+        },
+        {
+            "firstName": "Anant",
+            "age": 3
+        }
+    ]
+}
