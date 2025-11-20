@@ -88,3 +88,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     main(args.lower_threshold, args.upper_threshold, args.force_slack_alert, args.slack_webhook_url)
+
+# python /study-zone/GitHub/Python-BootCamp/miscellaneous/laptop_battery_alert.py --force-slack-alert --slack-webhook-url="https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+# sudo crontab -e
+# */5 * * * * /usr/bin/python3 /study-zone/GitHub/Python-BootCamp/miscellaneous/laptop_battery_alert.py --slack-webhook-url="https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
