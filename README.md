@@ -31,7 +31,8 @@ pip install jupyterlab ipython rich
 
 # start jupyter lab
 jupyter lab
-
+or
+jupyter lab --notebook-dir="/path/to/your/directory"
 
 ```
 
