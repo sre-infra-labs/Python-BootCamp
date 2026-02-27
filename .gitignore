@@ -26,6 +26,7 @@
 __pycache__/
 Untitled*.ipynb
 .DS_Store
+AWSCLIV2.pkg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
