@@ -1,5 +1,40 @@
 # Python Bootcamp
 
+# Install pyenv to work with multiple python versions in different projects
+```
+# switch to repo directory
+cd ~/Github/Python-Bootcamp
+
+# ensure os packages are latest - https://github.com/pyenv/pyenv?tab=readme-ov-file#homebrew-in-macos
+brew update
+brew install pyenv
+
+# setup shell environment - https://github.com/pyenv/pyenv?tab=readme-ov-file#b-set-up-your-shell-environment-for-pyenv
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(pyenv init - zsh)"' >> ~/.zshrc
+```
+
+# Instal Jupyter Notebook
+```
+# switch to repo directory
+cd ~/Github/Python-Bootcamp
+
+# create virtual environment
+python -m venv .venv
+
+# active virtual env
+source ./.venv/bin/activate
+
+# install jupyter lab
+pip install jupyterlab ipython rich
+
+# start jupyter lab
+jupyter lab
+
+
+```
+
 # Find running notebook sessions
 ```
 jupyter server list
