@@ -13,6 +13,30 @@ brew install pyenv
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
 echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
 echo 'eval "$(pyenv init - zsh)"' >> ~/.zshrc
+
+# check installed python versions
+pyenv versions
+
+# install specific python version
+pyenv install --list
+
+pyenv install 3.14.3
+pyenv install 3.11.15
+
+pyenv versions
+
+# Set global default (used everywhere)
+pyenv global 3.14.3
+
+# Set local version for a specific project folder
+cd ~/my-project
+pyenv local 3.11.15
+python --version
+
+# Set version for current shell session only
+pyenv shell 3.11.15
+python --version
+
 ```
 
 # Instal Jupyter Notebook
