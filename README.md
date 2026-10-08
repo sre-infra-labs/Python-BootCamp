@@ -3,16 +3,25 @@
 # Install pyenv to work with multiple python versions in different projects
 ```
 # switch to repo directory
-cd ~/Github/Python-Bootcamp
+cd ~
 
-# ensure os packages are latest - https://github.com/pyenv/pyenv?tab=readme-ov-file#homebrew-in-macos
-brew update
-brew install pyenv
+# On Mac
+  ## ensure os packages are latest - https://github.com/pyenv/pyenv?tab=readme-ov-file#homebrew-in-macos
+  brew update
+  brew install pyenv
 
-# setup shell environment - https://github.com/pyenv/pyenv?tab=readme-ov-file#b-set-up-your-shell-environment-for-pyenv
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-echo 'eval "$(pyenv init - zsh)"' >> ~/.zshrc
+  pyenv init --install
+
+  ## setup shell environment - https://github.com/pyenv/pyenv?tab=readme-ov-file#b-set-up-your-shell-environment-for-pyenv
+  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+  echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+  echo 'eval "$(pyenv init - zsh)"' >> ~/.zshrc
+
+# On Ubuntu
+  ## Install pyenv with automatic installer
+  curl -fsSL https://pyenv.run | bash
+
+  ~/.pyenv/bin/pyenv init --install
 
 # check installed python versions
 pyenv versions
@@ -41,22 +50,22 @@ python --version
 
 # Instal Jupyter Notebook
 ```
-# switch to repo directory
-cd ~/Github/Python-Bootcamp
-
-# create virtual environment
+# create virtual environment for jupyter notebook
+cd ~
 python -m venv .venv
 
-# active virtual env
-source ./.venv/bin/activate
+# active virtual environment
+source ~/.venv/bin/activate
 
-# install jupyter lab
-pip install jupyterlab ipython rich
+# In virtual environment, install notebook
+pip install notebook
 
-# start jupyter lab
-jupyter lab
-or
-jupyter lab --notebook-dir="/path/to/your/directory"
+# Launch notebook
+jupyter notebook
+ or
+jupyter notebook /stale-storage/GitHub/Python-BootCamp
+
+    http://localhost:8888/tree
 
 ```
 
