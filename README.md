@@ -78,6 +78,26 @@ Currently running servers:
 http://ryzen9:8888/?token=067f39526afcbebef45e811479ffccb1c29757e846ee5c03 :: /home/saanvi
 ```
 
+# Search python help text
+
+```bash
+
+python3 -m pydoc pandas.DataFrame
+python3 -m pydoc -k DataFrame
+
+python -c "import pandas; help(pandas.DataFrame)" | grep csv
+
+
+# View documentation of open (Built-in File Context Manager)
+python -c "help(open)" | grep -A 5 -i "context"
+
+# View implementation of contextlib.contextmanager
+python -c "import inspect, contextlib; print(inspect.getsource(contextlib.contextmanager))" | head -n 30
+
+
+
+>>> help(pandas.DataFrame)
+```
 
 # Interview Preparation
 - [Youtube - 50 Most Asked Python Interview Questions](https://www.youtube.com/watch?v=WH_ieAsb4AI)
