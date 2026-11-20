@@ -2,7 +2,7 @@
 
 - **Language:** SQL
 - **Level:** Advanced
-- **Topic:** Date overlap, aggregation and pivoting by quarter
+- **Topic:** Date overlap, aggregation and formatted output by quarter
 - **Practice more:** https://www.hackerrank.com/domains/sql
 
 > Written for this repo in the style of HackerRank practice problems. The wording and the solution are original. The instance types, sizing names and deployment times are sample values, not from a real account.
@@ -11,7 +11,7 @@
 
 A cloud team runs EC2 instances in deployments. A deployment starts at `dt_start` and ends at `dt_end`. If `dt_end` is NULL, the instance is still running.
 
-Write a SQL query that reports the compute cost of each configuration for each quarter of 2021. For each quarter, count only the hours that fall inside both the deployment and the quarter. Multiply those hours by the configuration's `price_per_hour` and round to two decimals. Show the configuration's `name`. Show every configuration, even one with no 2021 usage, with 0.0 for quarters without usage.
+Write a SQL query that reports the compute cost of each configuration for each quarter of 2021. For each quarter, count only the hours that fall inside both the deployment and the quarter. Show each quarter as `$cost = hours hours * $price/hr`, where the cost is the hours times the configuration's `price_per_hour`. Show the configuration's `name`. Show every configuration, even one with no 2021 usage, with zero values for quarters without usage.
 
 Deployments can start before 2021, end in 2022, or cross a quarter boundary. Use exact timestamps, not whole days.
 
@@ -22,7 +22,9 @@ Deployments can start before 2021, end in 2022, or cross a quarter boundary. Use
 
 ## Output format
 
-One line per configuration, sorted by `name`: `configuration | Q1'21 | Q2'21 | Q3'21 | Q4'21`.
+One line per configuration, sorted by `name`: `configuration | Q1'21 | Q2'21 | Q3'21 | Q4'21`. Each quarter cell looks like `$cost = hours hours * $price/hr`, with the cost and hours to 2 decimals and the price to 4 decimals.
+
+Example: `$121.00 = 350.00 hours * $0.0310/hr`
 
 ## Dataset
 
@@ -65,25 +67,33 @@ usage AS (
     FROM deployments d
     CROSS JOIN quarters q
     GROUP BY d.configuration_id, q.q
+),
+wide AS (
+    SELECT c.name, c.price_per_hour AS price,
+           COALESCE(SUM(CASE WHEN u.q = 'Q1''21' THEN u.hrs END), 0) AS h1,
+           COALESCE(SUM(CASE WHEN u.q = 'Q2''21' THEN u.hrs END), 0) AS h2,
+           COALESCE(SUM(CASE WHEN u.q = 'Q3''21' THEN u.hrs END), 0) AS h3,
+           COALESCE(SUM(CASE WHEN u.q = 'Q4''21' THEN u.hrs END), 0) AS h4
+    FROM configurations c
+    LEFT JOIN usage u ON u.cid = c.id
+    GROUP BY c.id, c.name, c.price_per_hour
 )
-SELECT c.name AS configuration,
-       ROUND(COALESCE(SUM(CASE WHEN u.q = 'Q1''21' THEN u.hrs END), 0) * c.price_per_hour, 2) AS "Q1'21",
-       ROUND(COALESCE(SUM(CASE WHEN u.q = 'Q2''21' THEN u.hrs END), 0) * c.price_per_hour, 2) AS "Q2'21",
-       ROUND(COALESCE(SUM(CASE WHEN u.q = 'Q3''21' THEN u.hrs END), 0) * c.price_per_hour, 2) AS "Q3'21",
-       ROUND(COALESCE(SUM(CASE WHEN u.q = 'Q4''21' THEN u.hrs END), 0) * c.price_per_hour, 2) AS "Q4'21"
-FROM configurations c
-LEFT JOIN usage u ON u.cid = c.id
-GROUP BY c.id, c.name, c.price_per_hour
-ORDER BY c.name;
+SELECT name AS configuration,
+       printf('$%.2f = %.2f hours * $%.4f/hr', h1 * price, h1, price) AS "Q1'21",
+       printf('$%.2f = %.2f hours * $%.4f/hr', h2 * price, h2, price) AS "Q2'21",
+       printf('$%.2f = %.2f hours * $%.4f/hr', h3 * price, h3, price) AS "Q3'21",
+       printf('$%.2f = %.2f hours * $%.4f/hr', h4 * price, h4, price) AS "Q4'21"
+FROM wide
+ORDER BY name;
 ```
 
 ## Expected output
 
 ```text
-2vpu.4gbram.50gbssd | 0.0 | 0.17 | 0.17 | 0.0
-2vpu.8gbram.100gbssd | 175.1 | 209.66 | 113.47 | 211.97
-4vpu.15gbram.250gbssd | 201.24 | 277.41 | 211.49 | 155.22
-8vpu.64gbram.500gbssd | 40.15 | 16.72 | 0.0 | 6.3
+2vpu.4gbram.50gbssd | $0.00 = 0.00 hours * $0.0416/hr | $0.17 = 4.00 hours * $0.0416/hr | $0.17 = 4.00 hours * $0.0416/hr | $0.00 = 0.00 hours * $0.0416/hr
+2vpu.8gbram.100gbssd | $175.10 = 1824.00 hours * $0.0960/hr | $209.66 = 2184.00 hours * $0.0960/hr | $113.47 = 1182.00 hours * $0.0960/hr | $211.97 = 2208.00 hours * $0.0960/hr
+4vpu.15gbram.250gbssd | $201.24 = 1011.25 hours * $0.1990/hr | $277.41 = 1394.00 hours * $0.1990/hr | $211.49 = 1062.75 hours * $0.1990/hr | $155.22 = 780.00 hours * $0.1990/hr
+8vpu.64gbram.500gbssd | $40.15 = 79.67 hours * $0.5040/hr | $16.72 = 33.17 hours * $0.5040/hr | $0.00 = 0.00 hours * $0.5040/hr | $6.30 = 12.50 hours * $0.5040/hr
 ```
 
 ## Explanation
@@ -92,5 +102,6 @@ ORDER BY c.name;
 - The overlap is `MIN(end, quarter_end) - MAX(start, quarter_start)`. `MAX(0, ...)` gives 0 when the two periods don't overlap.
 - A NULL `dt_end` means the instance is still running, so `COALESCE` uses a far-future date.
 - `julianday` turns timestamps into fractional days, so multiplying by 24 gives exact hours, including partial days.
-- `CASE` pivots the quarterly hours into columns. `COALESCE` turns a missing quarter into 0.
-- `LEFT JOIN` keeps configurations with no 2021 usage, such as `t3.medium` in 2020.
+- The `wide` CTE pivots the quarterly hours into one row per configuration, and `printf` builds the `$cost = hours hours * $price/hr` text.
+- `LEFT JOIN` keeps configurations with no 2021 usage. Their quarters show zero.
+- The cost is computed from unrounded hours, so the displayed hours times the displayed price can differ from the displayed cost in the last cent.
